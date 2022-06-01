@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style.css">
+    <title>Pokemon ramdom vs</title>
+</head>
+<body>
+    
+    <h1 class="title">Pokedex</h1>
+
+    <div class="pokemon-list" id="lista-pokemon">
+        <div class="pokemo" id = "pokemon-1">
+            <img src="" alt=""/>
+            <p></p>
+        </div>
+        <div > </div>
+        <div class="pokemo" id="pokemon-2">
+        <img src="" alt=""/>
+        <p></p>
+        </div>
+        <div class="pokemo" id = "pokemon-3">
+            <img src="" alt=""/>
+            <p></p>
+        </div>
+        <div > </div>
+        <div class="pokemo" id="pokemon-4">
+            <img src="" alt=""/>
+            <p></p>
+        </div>
+        <div class="pokemo" id = "pokemon-5">
+            <img src="" alt=""/>
+            <p></p>
+        </div>
+        <div ></div>
+        <div class="pokemo" id="pokemon-6">
+            <img src="" alt=""/>
+            <p></p>
+        </div>
+
+    </div>
+
+
+
+
+
+    <script>
+let lista =document.getElementById('lista-pokemon');
+        
+
+function consultarPokemon(id, num) {
+    fetch(`https://pokeapi.co/api/v2/pokemon/${id}`)
+        .then(function (response) {
+            response.json()
+            .then(function (pokemon) {
+               crearPokemon(pokemon, num)
+               console.log(pokemon);
+                
+            })
+            
+        })
+        // bien .then()
+        // mal .catch()
+}
+
+function consultarPokemones() {
+
+    let primerid = Math.floor(Math.random() * 150);
+    let segundoid = Math.floor(Math.random() * 150);
+    let tercero = Math.floor(Math.random() * 150);
+    let cuarto = Math.floor(Math.random() * 150);
+    let quinto = Math.floor(Math.random() * 150);
+    let sexto = Math.floor(Math.random() * 150);
+    consultarPokemon(primerid, 1);
+    consultarPokemon(segundoid, 2);
+    consultarPokemon(tercero, 3);
+    consultarPokemon(cuarto, 4);
+    consultarPokemon(quinto, 5);
+    consultarPokemon(sexto, 6);
+}
+
+function crearPokemon(pokemon, num) {
+    //vamos a combertir la data en html
+    let item = lista.querySelector(`#pokemon-${num}`)
+    let imagen = item.getElementsByTagName("img")[0];
+    let nombre = item.getElementsByTagName("p")[0];
+    console.log(pokemon);
+    imagen.setAttribute("src", pokemon.sprites.front_default);
+    nombre.textContent = pokemon.name;
+
+    
+}
+consultarPokemones();
+    </script>
+</body>
+</html>
